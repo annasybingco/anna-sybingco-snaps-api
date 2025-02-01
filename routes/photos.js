@@ -1,11 +1,13 @@
 import express from "express";
 import fs from "fs";
+import cors from 'cors';
 const router = express.Router();
 
 const data = fs.readFileSync("./data/photos.json", "utf8");
 const photos = JSON.parse(data);
 
 router.use(express.json());
+router.use(cors({ origin: 'http://localhost:5173' }));
 
 router.get("/", function (req, res) {
   res.send(photos);
@@ -31,32 +33,25 @@ router.get("/:id/comments", (req, res) => {
   res.json(photo.comments);
 });
 
-// router.post("/:id/comments", (req, res) => {
-//   console.log(req.body);
-//   const comment = photos[photos.length].id;
+router.post("/:id/comments", (req, res) => {
+  const photo = photos.find((photo) => photo.id === req.params.id);
 
-//   const newComment = object.assign({ id: comment }, req.body);
-//   photos.push(newComment)
-//   fs.writeFile('./data/photos.json', JSON.stringify(photos), () => {
-//     res.status(201).json({
-//         status: 'great work',
-//         data: {
-//             photos: newComment
-//         }
-//     });
-//   });
-// });
+  if (!photo) {
+    return res.status(404).json({ error: "Photo not found" });
+  }
 
-  //     const photo = photos.find(photo => photo.id === req.params.id);
+  // Create a new comment object
+  const newComment = {
+    name: req.body.name,
+    comment: req.body.comment,
+    id: Date.now().toString(), 
+    timestamp: Date.now() 
+  };
 
-  //     if (!photo) {
-  //       return res.status(404).json({ error: "Photo not found" });
-  //     }
+  photo.comments.push(newComment);
 
-  //     const newComment = req.body;
+  res.status(201).json(photo.comments);
+});
 
-  //     photo.comments.push(newComment);
-
-  //     res.status(201).json(photo.comments);
 
 export default router;
