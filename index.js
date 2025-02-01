@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use('/api/tags', tagsRoute);
+app.use('/api', tagsRoute);
 
 app.use('/api/photos', photosRoute);
 

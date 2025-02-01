@@ -8,7 +8,7 @@ const filePath = path.resolve('data', 'tags.json');
 const tagsData = fs.readFileSync(filePath, 'utf-8');
 const tags = JSON.parse(tagsData);
 
-router.get("/endpoint1", function (req, res) {
+router.get("/tags", function (req, res) {
   res.send(tags);
 });
 
