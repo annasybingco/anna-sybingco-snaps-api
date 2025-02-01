@@ -1,15 +1,12 @@
 import express from 'express';
 import fs from 'fs';
-import path from 'path';
-
 const router = express.Router();
 
-const filePath = path.resolve('data', 'photos.json');
-const photosData = fs.readFileSync(filePath, 'utf-8');
-const photos = JSON.parse(photosData);
+const data = fs.readFileSync('./data/photos.json', 'utf8')
+console.log(data)
 
-router.get("/endpoint2", function (req, res) {
-  res.send(photos);
+router.get("/photos", function (req, res) {
+  res.send(data);
 });
 
 router.get("/endpoint2/:id", (req, res) => {
