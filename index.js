@@ -1,18 +1,22 @@
 import express from 'express';
 import cors from 'cors';
-import tagsRoute from './routes/tags.js'
-
+import tagsRoute from './routes/tags.js';
+import photosRoute from './routes/photos.js';
+import 'dotenv/config';
+const port = process.env.PORT || 8000
 const app = express();
 
-app.use(cors())
+app.use(cors({ origin: 'http://localhost:5173' }));
 
-app.use('/api', tagsRoute)
-
-app.get('/', function(req, res) {
-    console.log('inside tag endpoint')
-    res.send('Welcome to /');
+app.get('/', (req, res) => {
+    res.send('Express is running!');
 });
 
-app.listen (8888, function() {
-    console.log('Hello World')
+
+app.use('/api', tagsRoute);
+
+app.use('/api/photos', photosRoute);
+
+app.listen (port, function() {
+    console.log(`listening on port' ${port}`)
 })
