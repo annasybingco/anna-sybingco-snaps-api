@@ -1,18 +1,17 @@
 import express from 'express';
 import cors from 'cors';
-import tagsRoute from './routes/tags.js'
-
+import tagsRoute from './routes/tags.js';
 const app = express();
 
-app.use(cors())
+app.use(cors({ origin: 'http://localhost:5173' }));
 
-app.use('/api', tagsRoute)
-
-app.get('/', function(req, res) {
-    console.log('inside tag endpoint')
-    res.send('Welcome to /');
+app.get('/', (req, res) => {
+    res.send('Express is running!');
 });
 
+
+app.use('/api/tags', tagsRoute);
+
 app.listen (8888, function() {
-    console.log('Hello World')
+    console.log('listening')
 })
