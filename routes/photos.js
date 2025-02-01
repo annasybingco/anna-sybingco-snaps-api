@@ -22,21 +22,34 @@ router.get("/endpoint2/:id", (req, res) => {
     }
 });
 
-router.get("/endpoint2/:photoId/comments/", (req, res) => {
-    const { photoId, commentId } = req.params;
-    const photo = photos.find(photo => photo.id === photoId);
+// router.get("/endpoint2/:id/comments", (req, res) => {
+//     const { photoId, commentId } = req.params;
+//     const photo = photos.find(photo => photo.id === photoId);
     
-    if (photo) {
-        const comment = photo.comments.find(comment => comment.id === commentId);
+//     if (photo) {
+//         const comment = photo.comments.find(comment => comment.id === commentId);
+        
+//         if (comment) {
+//             res.json({ comment });  // Send the found comment as a JSON response
+//         } else {
+//             res.status(404).json({ error: 'Comment not found' });
+//         }
+//     } else {
+//         res.status(404).json({ error: 'Photo not found' });
+//     }
+// });
+
+router.get("/endpoint2/:id/comments", (req, res) => {
+    const comment = photos.find(photo => comment.id === req.params.id);
+    
         
         if (comment) {
             res.json({ comment });  // Send the found comment as a JSON response
         } else {
             res.status(404).json({ error: 'Comment not found' });
         }
-    } else {
-        res.status(404).json({ error: 'Photo not found' });
     }
-});
+);
+
 
 export default router;

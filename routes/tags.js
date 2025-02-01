@@ -1,15 +1,11 @@
 import express from 'express';
 import fs from 'fs';
-import path from 'path';
-
 const router = express.Router();
 
-const filePath = path.resolve('data', 'tags.json');
-const tagsData = fs.readFileSync(filePath, 'utf-8');
-const tags = JSON.parse(tagsData);
+const data = fs.readFileSync('./data/tags.json', 'utf8');
 
 router.get("/tags", function (req, res) {
-  res.send(tags);
+  res.send(data);
 });
 
 export default router;
