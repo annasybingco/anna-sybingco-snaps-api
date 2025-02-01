@@ -1,7 +1,7 @@
 [
   {
     "id": "6be619d5-de2c-4f62-ac1b-bd2e36d71ab9",
-    "photo": "http://localhost:8888/api/photos/Photo-00.png",
+    "photo": "https://unit-3-project-c5faaab51857.herokuapp.com/photos/Photo-00.png",
     "photoDescription": "Looking up to the Manhattan Bridge, in New York City, New York.",
     "photographer": "Greg Hooper",
     "likes": 910,
