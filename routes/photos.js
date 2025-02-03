@@ -1,13 +1,9 @@
 import express from "express";
 import fs from "fs";
-import cors from "cors";
 const router = express.Router();
 
 const data = fs.readFileSync("./data/photos.json", "utf8");
 const photos = JSON.parse(data);
-
-router.use(express.json());
-router.use(cors({ origin: CORS_ORGIN }));
 
 router.get("/", function (req, res) {
   res.send(photos);
