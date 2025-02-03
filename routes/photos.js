@@ -7,7 +7,7 @@ const data = fs.readFileSync("./data/photos.json", "utf8");
 const photos = JSON.parse(data);
 
 router.use(express.json());
-router.use(cors({ origin: "http://localhost:5173" }));
+router.use(cors({ origin: CORS_ORGIN }));
 
 router.get("/", function (req, res) {
   res.send(photos);

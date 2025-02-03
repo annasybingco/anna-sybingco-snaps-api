@@ -1,12 +1,14 @@
 import express from "express";
 import cors from "cors";
+import "dotenv/config";
 import tagsRoute from "./routes/tags.js";
 import photosRoute from "./routes/photos.js";
-import "dotenv/config";
-const port = process.env.PORT || 8000;
+
+const PORT = process.env.PORT || 8000;
+const { CORS_ORIGIN } = process.env;
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -17,6 +19,6 @@ app.use("/api", tagsRoute);
 
 app.use("/api/photos", photosRoute);
 
-app.listen(port, function () {
-  console.log(`listening on port' ${port}`);
+app.listen(PORT, function () {
+  console.log(`listening on port ${PORT}`);
 });
